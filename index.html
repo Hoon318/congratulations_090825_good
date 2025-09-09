@@ -8,139 +8,179 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet" />
+
 
     <style>
-      :root {
-        --bg: #fffdf8;
-        --ink: #111111;
-        --muted: #6b7280;
-        --brand: #0ea5e9; /* sky-500 */
-        --card: #ffffff;
-        --ring: #bae6fd;
+    :root {
+      --bg: #f7f3eb;      /* 바탕(아이보리) */
+      --card: #b4a58d;    /* 카드(토프/브라운) */
+      --ink: #ffffff;     /* 카드 안 글자색 */
+      --muted: rgba(255,255,255,.85);
+      --ring: rgba(255,255,255,.25);
+    }
+    
+    /* reset */
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: "Noto Serif KR", serif; /* 카드 느낌 살리는 서체 */
+    }
+    
+    /* 레이아웃(위치 유지) */
+    .wrap { max-width: 420px; margin: 0 auto; padding: 28px 16px 72px; }
+    .card {
+      position: relative;
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 14px 40px rgba(65,55,40,.12);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,.04);
+      text-align: center;         /* 중앙 정렬 */
+    }
+    
+    /* 카드 꽃 장식 (이미지 준비 시 교체) */
+    .card::before,
+    .card::after{
+      content:"";
+      position:absolute;
+      width:140px; height:140px;
+      pointer-events:none;
+      opacity:.95;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,.12));
+    }
+    .card::before{
+      top: -8px; left: -8px;
+      background: url('flower-top-left.png') no-repeat center/contain;
+    }
+    .card::after{
+      right: -8px; bottom: -8px;
+      background: url('flower-bottom-right.png') no-repeat center/contain;
+    }
+    /* 꽃 이미지가 당장 없을 때 임시 장식(지워도 무방) */
+    @supports (background: radial-gradient(circle, #fff, #000)){
+      .card:not(:has(.no-deco))::before{ background:
+        radial-gradient(closest-side, #fce7f3 0 60%, transparent 65%) , 
+        radial-gradient(closest-side, #fde68a 0 55%, transparent 60%);
+        background-size: 80px 80px, 60px 60px;
+        background-position: 10px 18px, 58px 60px; background-repeat: no-repeat;
+        opacity:.45; filter:none;
       }
-      * { box-sizing: border-box; }
-      html, body { margin: 0; padding: 0; }
-      body {
-        font-family: "Pretendard", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-        background: var(--bg);
-        color: var(--ink);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+      .card:not(:has(.no-deco))::after{ background:
+        radial-gradient(closest-side, #fecaca 0 60%, transparent 65%) , 
+        radial-gradient(closest-side, #bbf7d0 0 55%, transparent 60%);
+        background-size: 82px 82px, 62px 62px;
+        background-position: 72px 46px, 22px 8px; background-repeat: no-repeat;
+        opacity:.45; filter:none;
       }
-      .wrap {
-        max-width: 560px;
-        margin: 0 auto;
-        padding: 20px 16px 72px;
-      }
-      .card {
-        background: var(--card);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(17,17,17,0.06);
-        overflow: hidden;
-        border: 1px solid #eee;
-      }
-      .hero {
-        position: relative;
-        aspect-ratio: 16/9;
-        width: 100%;
-        background: #f3f4f6 url("img.png") center/cover no-repeat;
-      }
-      .badge {
-        position: absolute;
-        bottom: 12px; left: 12px;
-        background: rgba(255,255,255,0.92);
-        color: var(--ink);
-        padding: 6px 10px;
-        border-radius: 999px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        border: 1px solid #e5e7eb;
-      }
-      .badge svg { width: 14px; height: 14px; }
+    }
+    
+    /* 히어로(위치 유지하되 카드 톤으로) */
+    .hero{
+      position: relative;
+      aspect-ratio: 16/5;             /* 너무 크지 않게 */
+      width: 100%;
+      background: var(--card) center/cover no-repeat; /* 기존 img.png가 있어도 카드색으로 자연스레 */
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,0) 80%);
+    }
+    /* 배지: 카드 톤에 맞춘 유리 느낌, 필요 없으면 opacity로 숨김만 */
+    .badge{
+      position:absolute; bottom: 10px; left: 10px;
+      background: rgba(255,255,255,.9);
+      color: #4b5563;
+      padding: 6px 10px; border-radius: 999px;
+      font-size: 12px; font-weight: 700;
+      display: inline-flex; gap: 6px; align-items: center;
+      border: 1px solid rgba(0,0,0,.06);
+      backdrop-filter: blur(6px) saturate(160%);
+    }
+    .badge svg{ width:14px; height:14px; }
+    
+    /* 본문 섹션 (위치/구조 유지) */
+    .section{ padding: 20px; position: relative; z-index: 1; }
+    
+    /* 제목/서브타이틀: 예시 이미지 톤 */
+    .title{
+      margin: 8px 0 6px;
+      font-size: 22px;
+      line-height: 1.35;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .subtitle{
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    
+    /* info 블록: 한 줄 컬럼으로, 테두리/배경 제거하여 카드와 일체화 */
+    .info{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .info .item{
+      background: transparent;
+      border: 0;
+      padding: 0;
+      border-radius: 0;
+    }
+    .item h4{
+      margin: 0 0 4px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .item p{
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    
+    /* 버튼: 예시엔 버튼이 없지만 기존 구조 유지 – 카드 톤에 어울리는 미니멀 */
+    .btns{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .btn{
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 44px; border-radius: 10px;
+      border: 1px solid var(--ring);
+      background: rgba(255,255,255,.1);
+      color: var(--ink);
+      font-weight: 700; text-decoration: none;
+    }
+    .btn.secondary{ background: rgba(0,0,0,.18); border-color: rgba(0,0,0,.18); color: #fff; }
+    
+    /* 그 외 요소는 기본적으로 감춤 없이 유지(필요시 아래 라인 주석 해제해서 감춤) */
+    /* .timeline, .gallery, .divider { display:none; } */
+    
+    .footer{
+      text-align:center; color: var(--muted); font-size: 12px; padding: 18px;
+    }
+    
+    /* 초소형 디바이스 */
+    @media (max-width: 360px){
+      .wrap{ padding: 20px 12px 64px; }
+      .title{ font-size: 20px; }
+      .item p{ font-size: 14px; }
+    }
 
-      .section { padding: 20px; }
-      .title {
-        font-size: 28px;            /* 살짝 키워서 존재감 */
-        line-height: 1.4;           /* 넉넉한 행간으로 고급스러움 */
-        font-weight: 600;           /* 700보다는 조금 낮춰 세련된 느낌 */
-        margin: 0 0 12px;           /* 여백을 늘려 여유로움 강조 */
-        letter-spacing: -0.02em;    /* 자간 미세 조정 */
-        color: #222;                /* 부드러운 블랙 */
-        font-family: "Noto Serif KR", "Times New Roman", serif; 
-      }
-      .subtitle { color: var(--muted); margin: 0 0 16px; font-size: 15px; text-align: center; }
-
-      .info {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 12px;
-        margin-top: 12px;
-      }
-      .info .item {
-        background: #fafafa;
-        border: 1px solid #f0f0f0;
-        border-radius: 14px;
-        padding: 12px;
-      }
-      .item h4 {
-        margin: 0 0 4px;
-        font-size: 13px;
-        color: #374151;
-      }
-      .item p { margin: 0; font-size: 15px; font-weight: 600; }
-      .item h3 {
-        margin: 0 0 4px;
-        font-size: 15px;
-        color: #374151;
-        text-align: center;
-      }
-      .btns {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-        margin-top: 18px;
-      }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        height: 48px;
-        border-radius: 12px;
-        border: 1px solid var(--ring);
-        background: #f0f9ff;
-        color: #0369a1;
-        font-weight: 700;
-        text-decoration: none;
-      }
-      .btn.secondary {
-        background: #111827;
-        color: #fff;
-        border-color: #111827;
-      }
-
-      .divider { height: 1px; background: #eee; margin: 16px 0; }
-
-      .timeline { list-style: none; padding: 0; margin: 0; }
-      .timeline li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 10px 0; }
-      .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--brand); margin-top: 6px; }
-      .time { font-size: 12px; color: var(--muted); }
-      .desc { font-size: 15px; }
-
-      .gallery { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
-      .gallery img { width: 100%; height: 88px; object-fit: cover; border-radius: 10px; }
-
-      .footer { text-align: center; color: var(--muted); font-size: 12px; padding: 18px; }
-
-      /* small tweaks for very narrow devices */
-      @media (max-width: 360px) {
-        .info { grid-template-columns: 1fr; }
-        .btns { grid-template-columns: 1fr; }
-      }
     </style>
   </head>
   <body>
