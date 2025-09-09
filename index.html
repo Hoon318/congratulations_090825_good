@@ -81,26 +81,57 @@
     }
     
     /* 히어로(위치 유지하되 카드 톤으로) */
-    .hero {
+    .hero{
       position: relative;
       aspect-ratio: 16/9;
       width: 100%;
-      background: #fff; /* 흰 바탕 */
+      background:#fff;
     }
-    .hero::before {
+    
+    /* 좌상단 */
+    .hero::before{
       content:"";
-      position:absolute;
-      top:0; left:0;
-      width:120px; height:120px;
-      background:url("flower-top-left.png") no-repeat center/contain;
+      position:absolute; top:6px; left:6px; width:160px; height:160px; z-index:0; pointer-events:none;
+      background: url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>\
+        <g fill='none'>\
+          <circle cx='46' cy='40' r='22' fill='%23ffdbe6'/>\
+          <circle cx='78' cy='30' r='20' fill='%23ffe8ee'/>\
+          <circle cx='104' cy='58' r='20' fill='%23ffd1dc'/>\
+          <circle cx='62' cy='86' r='20' fill='%23ffe3ea'/>\
+          <circle cx='30' cy='74' r='18' fill='%23ffd1dc'/>\
+          <circle cx='46' cy='40' r='6'  fill='%23f9a8d4'/>\
+          <circle cx='78' cy='30' r='6'  fill='%23f9a8d4'/>\
+          <circle cx='104' cy='58' r='6' fill='%23f472b6'/>\
+          <circle cx='62' cy='86' r='6'  fill='%23f9a8d4'/>\
+          <circle cx='30' cy='74' r='6'  fill='%23f472b6'/>\
+          <ellipse cx='18' cy='102' rx='12' ry='8' fill='%2386efac'/>\
+          <ellipse cx='122' cy='90' rx='12' ry='8' fill='%2386efac'/>\
+        </g></svg>") center/contain no-repeat;
     }
-    .hero::after {
+    
+    /* 우하단 */
+    .hero::after{
       content:"";
-      position:absolute;
-      bottom:0; right:0;
-      width:120px; height:120px;
-      background:url("flower-bottom-right.png") no-repeat center/contain;
+      position:absolute; right:6px; bottom:6px; width:170px; height:170px; z-index:0; pointer-events:none;
+      background: url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' width='170' height='170' viewBox='0 0 170 170'>\
+        <g fill='none'>\
+          <circle cx='120' cy='118' r='22' fill='%23ffe3ea'/>\
+          <circle cx='90' cy='124' r='20' fill='%23ffd1dc'/>\
+          <circle cx='66' cy='98'  r='20' fill='%23ffe8ee'/>\
+          <circle cx='106' cy='70' r='20' fill='%23ffdbe6'/>\
+          <circle cx='134' cy='86' r='18' fill='%23ffd1dc'/>\
+          <circle cx='120' cy='118' r='6' fill='%23f9a8d4'/>\
+          <circle cx='90'  cy='124' r='6' fill='%23f472b6'/>\
+          <circle cx='66'  cy='98'  r='6' fill='%23f9a8d4'/>\
+          <circle cx='106' cy='70' r='6' fill='%23f472b6'/>\
+          <circle cx='134' cy='86' r='6' fill='%23f9a8d4'/>\
+          <ellipse cx='28' cy='64'  rx='12' ry='8' fill='%2386efac'/>\
+          <ellipse cx='150' cy='150' rx='12' ry='8' fill='%2386efac'/>\
+        </g></svg>") center/contain no-repeat;
     }
+
 
     /* 배지: 카드 톤에 맞춘 유리 느낌, 필요 없으면 opacity로 숨김만 */
     .badge{
