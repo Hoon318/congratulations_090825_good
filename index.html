@@ -81,17 +81,27 @@
     }
     
     /* 히어로(위치 유지하되 카드 톤으로) */
-    .hero{
+    .hero {
       position: relative;
-      aspect-ratio: 16/5;             /* 너무 크지 않게 */
+      aspect-ratio: 16/9;
       width: 100%;
-      background: var(--card) center/cover no-repeat; /* 기존 img.png가 있어도 카드색으로 자연스레 */
+      background: #fff; /* 흰 바탕 */
     }
-    .hero::after{
+    .hero::before {
       content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,0) 80%);
+      position:absolute;
+      top:0; left:0;
+      width:120px; height:120px;
+      background:url("flower-top-left.png") no-repeat center/contain;
     }
+    .hero::after {
+      content:"";
+      position:absolute;
+      bottom:0; right:0;
+      width:120px; height:120px;
+      background:url("flower-bottom-right.png") no-repeat center/contain;
+    }
+
     /* 배지: 카드 톤에 맞춘 유리 느낌, 필요 없으면 opacity로 숨김만 */
     .badge{
       position:absolute; bottom: 10px; left: 10px;
