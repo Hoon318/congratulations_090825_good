@@ -96,15 +96,16 @@
       position: relative; /* 배지와 겹치지 않게 */
       font-family: "Noto Serif KR", serif;
       font-size: 22px;
-      font-weight: 700;
-      color: #5a4633;     /* 갈색 글씨 */
+      font-weight: 800;
+      color: #4b2e18;          /* 진한 갈색 */
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 은은한 그림자 */
       z-index: 1;         /* 꽃보다 위에 표시 */
     }
     
     /* 좌상단 */
     .hero::before{
       content:"";
-      position:absolute; top:6px; left:6px; width:160px; height:160px; z-index:0; pointer-events:none;
+      position:absolute; top:8px; left:3px; width:160px; height:160px; z-index:0; pointer-events:none;
       background: url("data:image/svg+xml;utf8,\
       <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>\
         <g fill='none'>\
@@ -126,7 +127,7 @@
     /* 우하단 */
     .hero::after{
       content:"";
-      position:absolute; right:6px; bottom:6px; width:170px; height:170px; z-index:0; pointer-events:none;
+      position:absolute; right:3px; bottom:8px; width:170px; height:170px; z-index:0; pointer-events:none;
       background: url("data:image/svg+xml;utf8,\
       <svg xmlns='http://www.w3.org/2000/svg' width='170' height='170' viewBox='0 0 170 170'>\
         <g fill='none'>\
@@ -173,7 +174,7 @@
     }
     .subtitle{
       margin: 0 0 14px;
-      font-size: 13px;
+      font-size: 13.7px;
       color: var(--muted);
     }
     
