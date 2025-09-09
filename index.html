@@ -81,11 +81,24 @@
     }
     
     /* 히어로(위치 유지하되 카드 톤으로) */
-    .hero{
+    .hero {
       position: relative;
       aspect-ratio: 16/9;
       width: 100%;
-      background:#fff;
+      background: #fff;
+      display: flex;              /* 중앙 배치 */
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .hero-title {
+      position: relative; /* 배지와 겹치지 않게 */
+      font-family: "Noto Serif KR", serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #5a4633;     /* 갈색 글씨 */
+      z-index: 1;         /* 꽃보다 위에 표시 */
     }
     
     /* 좌상단 */
@@ -238,6 +251,7 @@
             </svg>
             2025. 10. 25 (토) · 오후 6시
           </span>
+          <h1 class="hero-title">초대 합니다.</h1>
         </div>
 
         <section class="section">
